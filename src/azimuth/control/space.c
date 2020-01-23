@@ -180,6 +180,64 @@ az_space_action_t az_space_event_loop(
     az_event_t event;
     while (az_poll_event(&event)) {
       switch (event.kind) {
+#ifndef NDEBUG
+        // Cheat mode activated, for checking powerup descriptions.
+        case AZ_EVENT_KEY_UP: {
+          int maybe_upgrade = -1;
+          if (!event.key.command) break;
+          switch (event.key.id) {
+            case AZ_KEY_G: {
+              static az_upgrade_t gun = AZ_UPG_GUN_CHARGE;
+              maybe_upgrade = gun;
+              if (gun < AZ_UPG_GUN_BEAM) ++gun;
+              break;
+            }
+            case AZ_KEY_U: {
+              static az_upgrade_t special_upgrade = AZ_UPG_HYPER_ROCKETS;
+              maybe_upgrade = special_upgrade;
+              if (special_upgrade < AZ_UPG_MILLIWAVE_RADAR) ++special_upgrade;
+              break;
+            }
+            case AZ_KEY_T:
+              maybe_upgrade = AZ_UPG_TRACTOR_BEAM;
+              break;
+            case AZ_KEY_R: {
+              static az_upgrade_t rocket_upgrade = AZ_UPG_ROCKET_AMMO_00;
+              maybe_upgrade = rocket_upgrade;
+              if (rocket_upgrade < AZ_UPG_ROCKET_AMMO_29) ++rocket_upgrade;
+              break;
+            }
+            case AZ_KEY_B: {
+              static az_upgrade_t bomb_upgrade = AZ_UPG_BOMB_AMMO_00;
+              maybe_upgrade = bomb_upgrade;
+              if (bomb_upgrade < AZ_UPG_BOMB_AMMO_19) ++bomb_upgrade;
+              break;
+            }
+            case AZ_KEY_C: {
+              static az_upgrade_t cap_upgrade = AZ_UPG_CAPACITOR_00;
+              maybe_upgrade = cap_upgrade;
+              if (cap_upgrade < AZ_UPG_CAPACITOR_11) ++cap_upgrade;
+              break;
+            }
+            case AZ_KEY_S: {
+              static az_upgrade_t shield_upgrade = AZ_UPG_SHIELD_BATTERY_00;
+              maybe_upgrade = shield_upgrade;
+              if (shield_upgrade < AZ_UPG_SHIELD_BATTERY_11) ++shield_upgrade;
+              break;
+            }
+            default: break;
+          }
+          if (maybe_upgrade >= 0) {
+            az_upgrade_t upgrade = maybe_upgrade;
+            state.mode = AZ_MODE_UPGRADE;
+            state.upgrade_mode = (az_upgrade_mode_data_t){
+              .step = AZ_UGS_OPEN, .progress = 0.0, .upgrade = upgrade,
+            };
+            az_give_upgrade(&state.ship.player, upgrade);
+          }
+          break;
+        }
+#endif
         case AZ_EVENT_KEY_DOWN:
           if (state.skip.allowed && !state.skip.active) {
             assert(state.sync_vm.script != NULL);
