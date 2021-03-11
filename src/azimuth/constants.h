@@ -37,8 +37,8 @@
 #endif
 
 // How much time should elapse between frames:
-#define AZ_FRAME_TIME_SECONDS (1.0 / 60.0)
-#define AZ_FRAME_TIME_NANOS 16666666u
+#define AZ_FRAME_TIME_SECONDS (1.0 / 25.0)
+#define AZ_FRAME_TIME_NANOS 40000000u
 
 /*===========================================================================*/
 // Planetoid:
