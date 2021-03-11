@@ -42,11 +42,11 @@ void az_reset_prefs_to_defaults(az_preferences_t *prefs) {
       [AZ_CONTROL_DOWN] = AZ_KEY_DOWN_ARROW,
       [AZ_CONTROL_RIGHT] = AZ_KEY_RIGHT_ARROW,
       [AZ_CONTROL_LEFT] = AZ_KEY_LEFT_ARROW,
-      [AZ_CONTROL_FIRE] = AZ_KEY_PAGE_DOWN,
+      [AZ_CONTROL_FIRE] = AZ_KEY_HOME,
       [AZ_CONTROL_ORDN] = AZ_KEY_RIGHT_CONTROL,
-      [AZ_CONTROL_UTIL] = AZ_KEY_HOME,
+      [AZ_CONTROL_UTIL] = AZ_KEY_RIGHT_SHIFT,
       [AZ_CONTROL_PAUSE] = AZ_KEY_ESCAPE,
-      [AZ_CONTROL_BOMBS] = AZ_KEY_PAGE_UP,
+      [AZ_CONTROL_BOMBS] = AZ_KEY_PAGE_DOWN,
       [AZ_CONTROL_CHARGE] = AZ_KEY_1,
       [AZ_CONTROL_FREEZE] = AZ_KEY_2,
       [AZ_CONTROL_TRIPLE] = AZ_KEY_3,
@@ -55,7 +55,7 @@ void az_reset_prefs_to_defaults(az_preferences_t *prefs) {
       [AZ_CONTROL_BURST] = AZ_KEY_6,
       [AZ_CONTROL_PIERCE] = AZ_KEY_7,
       [AZ_CONTROL_BEAM] = AZ_KEY_8,
-      [AZ_CONTROL_ROCKETS] = AZ_KEY_END,
+      [AZ_CONTROL_ROCKETS] = AZ_KEY_PAGE_UP,
     },
   };
 }
