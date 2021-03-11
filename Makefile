@@ -42,7 +42,7 @@ else ifeq "$(BUILDTYPE)" "release"
   # For release builds, disable asserts, but don't warn about e.g. static
   # functions or local variables that are only used for asserts, and which
   # therefore become unused when asserts are disabled.
-  CFLAGS += -O2 -DNDEBUG -Wno-unused-function -Wno-unused-variable \
+  CFLAGS += -Ofast -DNDEBUG -Wno-unused-function -Wno-unused-variable \
             -Wno-empty-body
 else
   $(error BUILDTYPE must be 'debug' or 'release')
